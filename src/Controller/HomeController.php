@@ -10,7 +10,7 @@ use App\Repository\JeuRepository;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/home', name: 'app_home')]
     public function index(JeuRepository $jeuRepository): Response
     {
         $jeux = $jeuRepository->findAll();
