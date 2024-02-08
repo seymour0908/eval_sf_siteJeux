@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 class JeuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -15,7 +17,15 @@ class JeuType extends AbstractType
             ->add('titre')
             ->add('image')
             ->add('description')
-            ->add('plateforme')
+            ->add('plateforme', ChoiceType::class, [
+            'choices' => [
+                'PC' => 'pc',
+                'PlayStation5' => 'playstation5',
+                'Xbox' => 'xbox',
+                'Nintendo Switch' => 'nintendo_switch',
+                // ajoutez d'autres plateformes selon le besoin
+            ],
+        ])
             ->add('prix')
         ;
     }
@@ -26,4 +36,5 @@ class JeuType extends AbstractType
             'data_class' => Jeu::class,
         ]);
     }
+
 }

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Jeux disponibles</h1>
+    <div class="row">
+        {% for jeu in jeux %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ jeu.image }}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Image du jeu">
+                    <div class="card-body">
+                        <p class="card-text">{{ jeu.titre }}</p>
+                        <p class="card-text">{{ jeu.description | slice(0, 100) ~ '...' }}</p>
+                        <p class="card-text">Plateforme: {{ jeu.plateforme }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Prix: {{ jeu.prix }} €</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun jeu disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
