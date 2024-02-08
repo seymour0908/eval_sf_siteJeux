@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class JeuType extends AbstractType
 {
@@ -15,7 +16,10 @@ class JeuType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('image')
+            ->add('imageFile', FileType::class, [
+            'required' => false,
+            'label' => 'Image du jeu',
+        ])
             ->add('description')
             ->add('plateforme', ChoiceType::class, [
             'choices' => [

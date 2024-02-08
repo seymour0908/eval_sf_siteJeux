@@ -6,8 +6,18 @@ use App\Repository\JeuRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 #[ORM\Entity(repositoryClass: JeuRepository::class)]
 class Jeu
+
+/**
+     * @Vich\UploadableField(mapping="jeu_image", fileNameProperty="imageName")
+     * 
+     * @var File|null
+     */
+    
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,8 +27,7 @@ class Jeu
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    private $imageFile;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -57,6 +66,25 @@ class Jeu
 
         return $this;
     }
+    
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+
 
     public function getDescription(): ?string
     {
